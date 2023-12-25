@@ -1,0 +1,5 @@
+OVERVIEW OF PROJECT :
+
+
+The best technique of learning a skill is completing a project which is based on real life scenario and when it comes to analytics, i have created an end to end project on data analysis using SQL, thi will be relevant to all those people who want to make a career into analytics,In this project we performed various automation process in excel through macros and vba .Also made the VBA code into q/a notes to get better understandable .Here i had attached the source excel file i created to  perform automation . Through this project you can easily understand the basic VBA & macros concepts and get better practice experience.
+ 

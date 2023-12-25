@@ -1,0 +1,174 @@
+1. MARKING COLOURS DEPENDS ON VALUE :
+
+Public Sub procedure2()
+Dim i As Integer
+
+i = 1
+
+Do While i <= 10
+   If ActiveCell.Value > 10 Then
+   ActiveCell.Interior.Color = RGB(255, 0, 0)
+   End If
+   ActiveCell.Offset(1, 0).Select
+   i = i + 1
+   Loop
+   End Sub
+
+2. SORTING THROUGH INPUT BOX OPIONS :
+
+Public Sub usersortinput()
+  Dim userinput As String
+  Dim promptmsg As String
+  Dim tryagain As Integer
+  
+  
+  promptmsg = "Enter the sort option..." & vbCrLf & _
+              "1 --- sort by division" & vbCrLf & _
+              "2 --- sort by category" & vbCrLf & _
+              "3 --- sort by total"
+   
+  userinput = InputBox(promptmsg)
+  
+  If userinput = "1" Then
+      DivisionSort
+  ElseIf userinput = "2" Then
+    CategorySort
+    ElseIf userinput = "3" Then
+      TotalSort
+       Else
+      tryagain = MsgBox("Invalid identifiers ! Try again", vbYesNo)
+        If tryagain = 6 Then
+        usersortinput
+       End If
+       End If
+      End Sub
+
+
+3. ADDING AND FORMATTING HEADERS :
+
+
+maros activity 
+
+add headers 
+
+format headers 
+
+
+then 
+
+Public Sub cleanupdata()
+Dim i As Integer
+i = 1
+ Do While i <= Worksheets.Count
+ Worksheet(i).Select
+    addheaders
+    formatheaders
+    i = i + 1
+ Loop
+End Sub
+
+
+4. CALCULATION ON ALL WORKSHEET :
+
+
+Public Sub automatesum()
+
+Dim lastcell As String
+Dim i As Integer
+i = 1
+Do While i <= Worksheets.Count
+Worksheets(i).Select
+
+'selects the f2 cell of the ative sheet
+Range("f2").Select
+'select last cell of the column
+Selection.End(xlDown).Select
+
+lastcell = ActiveCell.Address(False, False)
+
+ActiveCell.Offset(1, 0).Select
+ActiveCell.Value = "=SUM(F2:" & lastcell & ")"
+i = i + 1
+Loop
+
+End Sub
+
+
+5. COMBINE ALL REPORTS TOGETHER :
+
+
+Public Sub finalreport()
+Dim i As Integer
+
+i = 1
+Do While i <= Worksheets.Count - 1
+   Worksheets(i).Select
+   
+   AddHeaders
+   FormatData
+   AutoSum
+   
+   'copy the current data
+   Range("A1").Select
+   Selection.CurrentRegion.Select
+   
+   Selection.Copy
+   'select the final report ws
+   Worksheets("YEARLY REPORT").Select
+   'find the empty cell
+   Range("A3000").Select
+   
+   Selection.End(xlUp).Select
+   
+   ActiveCell.Offset(3, 0).Select
+   'paste the new data in
+   ActiveSheet.Paste
+
+   i = i + 1
+   
+ Loop
+  Columns("C:F").EntireColumn.AutoFit
+  
+  
+
+End Sub
+
+
+6. SELECTING WORKSHEET , ADDING WORKSHEET , RUN MACRO THROUGH DIALOG BOX :
+
+Private Sub Cbowhichsheet_Change()
+   Worksheets(Me.Cbowhichsheet.Value).Select
+   End Sub
+
+Private Sub cmdaddsheet_Click()
+      Worksheets.Add before:=Worksheets(1)
+      ActiveSheet.Name = InputBox("Please enter the name")
+End Sub
+
+
+Private Sub cmdrunreport_Click()
+   FinalReport
+End Sub
+
+Private Sub UserForm_Initialize()
+Dim i As Integer
+i = 1
+Do While i <= Worksheets.Count
+Me.Cbowhichsheet.AddItem Worksheets(i).Name
+i = i + 1
+Loop
+End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
